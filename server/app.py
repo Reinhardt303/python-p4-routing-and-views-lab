@@ -32,7 +32,18 @@ def count(parameter):
     return Response(generate(), mimetype="text/plain")
 
 @app.route('/math/<int:num1>/<string:operation>/<int:num2>')
-def math(num1, num2, operation):
+def math(num1, operation, num2):
+    if operation == '+':
+        result = num1 + num2
+    elif operation == '-':
+        result = num1 - num2
+    elif operation == '*':
+        result = num1 * num2
+    elif operation == 'div':  
+        result = num1 / num2
+    elif operation == '%':
+        result = num1 % num2
+    else:
+        return "Invalid operation", 400
 
-    return str(eval(f"{num1}{operation}{num2}")) #may need to use try/except here for invalid operations 
-
+    return str(result)
